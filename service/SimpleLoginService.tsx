@@ -41,7 +41,14 @@ export default class SimpleLoginService{
 
     async getWelcome(){return await this.httpClient.get({url:this.apiHost});}
     async login(username:string,password:string){return await this.post({url:"/auth/login",body:{username,password}});}
-    async register(username:string,password:string){return await this.postPlain({url:"/auth/register",body:{username,password}});}
+    async register(username:string,password:string){
+        
+        let response=await this.post({url:"/auth/register",body:{username,password}});
+        if(response.statusCode==500){
+            throw Error("Registration Failed");
+        }
+
+    }
 
     async listUser(token:string){return await this.get({url:"/user",headers:{'Authorization':'Bearer '+token}});}
     async retrieve(id:string){return await this.get({url:"/user/"+id});}

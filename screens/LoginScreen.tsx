@@ -35,8 +35,12 @@ class LoginScreen extends Component {
          }else{
             localStorage.setItem("access_token",json.access_token)
            this.setState({welcome:'Login Successfull'});
-           let users=await simpleLoginService.listUser(json.access_token);
-           this.setState({users});  
+            let fetchUsers=async ()=>{
+            let users=await simpleLoginService.listUser(json.access_token);
+            this.setState({users});   
+           }
+           setInterval(fetchUsers,5000);
+           fetchUsers();
          }
        }catch(e){
          console.log(e);

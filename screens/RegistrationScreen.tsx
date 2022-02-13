@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { StyleSheet, TextInput,Text, View, Button } from 'react-native';
 
 import {localStorage, simpleLoginService} from '../others/singleton'
-import { RootStackScreenProps } from '../types';
 class RegistrationScreen extends Component {
    state = {
     username:'',
@@ -10,10 +9,10 @@ class RegistrationScreen extends Component {
     registrationStatus:''
  }
 
-   constructor(props:RootStackScreenProps<'NotFound'>){
-     super(props);
-     
-   }
+ constructor(props:any){
+    super(props);
+    
+  }
     componentDidMount = async () => {}
 
    async onSubmit(){
@@ -23,7 +22,7 @@ class RegistrationScreen extends Component {
         this.setState({username:'',password:'',registrationStatus:'Registration Successfull!!'});
         
     }catch(e:any){
-        this.setState({registrationStatus:'Registration Failed'+e.message});
+        this.setState({registrationStatus:'Registration Failed'});
         console.log(e)
     }
    }
@@ -36,18 +35,17 @@ class RegistrationScreen extends Component {
             {this.state.registrationStatus}
             </Text>
 
-            <Text style={styles.label}>
-            Username
-            </Text>
             <TextInput
           blurOnSubmit={true}
           placeholder="Username"
           style={styles.textinput}
           onChangeText={(username) => this.setState({username})} value={this.state.username}
         />
-            <Text style={styles.label}>
-               Password
-            </Text>
+<Text style={{marginTop:5}}>Username needs to be</Text>
+<Text>* 8-20 characters long</Text>
+<Text style={{marginBottom:20}}>* No special characters</Text>
+
+
          <TextInput
           blurOnSubmit={true}
           placeholder="Password"
@@ -56,6 +54,14 @@ class RegistrationScreen extends Component {
           onChangeText={(password) => this.setState({password})} value={this.state.password}
 
         />
+
+<Text style={{marginTop:5}}>Password needs to be</Text>
+<Text>* At least one upper case English letter</Text>
+<Text>* At least one lower case English letter</Text>
+<Text>* At least one digit</Text>
+<Text>* At least one special character</Text>
+<Text  style={{marginBottom:30}}>* Minimum eight in length Maximum 15 .</Text>
+     
         <Button color="#E0245E" onPress={()=>this.onSubmit()} title="Register" />
          </View>
          </View>

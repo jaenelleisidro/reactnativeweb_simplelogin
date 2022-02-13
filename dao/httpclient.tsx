@@ -22,9 +22,9 @@ export class HttpClient{
         if(["GET"].includes(requestOptions.method)==false){//get can't have body
             requestOptions.body=JSON.stringify(body)
         }
-        // console.log("requestOptions",requestOptions,url);
+        console.log("requestOptions",requestOptions,url);
         let response=await fetch(url,requestOptions).then((response) => response.text());
-        // console.log("response",response);
+        console.log("response",response);
         return response;
     }
     async requestJson({method="GET",url,query={},body={},headers={}}:RequestInterface){
@@ -32,12 +32,9 @@ export class HttpClient{
         if(["GET"].includes(requestOptions.method)==false){//get can't have body
             requestOptions.body=JSON.stringify(body)
         }
-        // console.log("requestOptions",requestOptions,url);
-        let response=await fetch(url, requestOptions).then(response =>{
-            // console.log("response raw",response)
-            return response.json()
-        });
-        // console.log("response",response);
+        console.log("requestOptions",requestOptions,url);
+        let response=await fetch(url, requestOptions).then((response) =>response.json());
+        console.log("response3",JSON.stringify(response));
         return response;        
     }
 }
