@@ -58,6 +58,7 @@ function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
+      backBehavior='none'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
